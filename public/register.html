@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>微聊</title>
+	<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/css/demo.css" />
+	<!--必要样式-->
+	<link rel="stylesheet" type="text/css" href="/css/component.css" />
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<!--[if IE]>
+<script src="js/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<div class="container demo-1">
+		<div class="content">
+			<div id="large-header" class="large-header">
+				<canvas id="demo-canvas"></canvas>
+				<div class="logo_box">
+					<h3>欢迎你</h3>
+					<form action="/register" name="f" id="registerform" method="post">
+						<div class="input_outer">
+							<span class="u_user"></span>
+							<input name="username" id="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+						</div>
+						<div class="input_outer">
+							<span class="us_uer"></span>
+							<input name="pwd" class="text" id="pwd" style="color: #FFFFFF !important; position:absolute; z-index:100;" type="password"
+							 placeholder="请输入密码">
+						</div>
+						<div class="input_outer">
+							<span class="us_uer"></span>
+							<input name="repwd" class="text" id="repwd" style="color: #FFFFFF !important; position:absolute; z-index:100;" type="password"
+							 placeholder="请重新输入密码">
+						</div>
+						<div class="mb2"><a class="act-but submit" style="color: #FFFFFF" onclick="register()">注册</a></div>
+						<div class="mb2" style="text-align:center;"><a href="login.html" style="color: #FFFFFF">已有账号，直接登录</a></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
+	<script src="/js/TweenLite.min.js"></script>
+	<script src="/js/EasePack.min.js"></script>
+	<script src="/js/rAF.js"></script>
+	<script src="/js/demo-1.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<div style="text-align:center;">
+	</div>
+</body>
+<script>
+	function register() {
+		var socket = io.connect('http://localhost:3001')
+		var pwd = $("#pwd").val()
+		var repwd = $("#repwd").val()
+
+		if (pwd !== repwd) {
+			alert("两次输入的密码不相同")
+			return
+		}
+		var a = $("#registerform").serialize()
+		$.post('/register', a, function (data) {
+			if (data.status == 1) {
+				alert(data.data)
+			} else {
+				socket.emit('login', { "username": data.data.username })
+				location.href = "chatroom.html"
+			}
+		})
+	}
+
+</script>
+
+</html>

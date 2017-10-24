@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    聊天室
+  </title>
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/face.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+</head>
+
+<body>
+  <div class="chatbox">
+    <div class="chat_top fn-clear">
+      <div class="logo"><img src="images/logo.png" width="190" height="60" alt="" /></div>
+      <div class="uinfo fn-clear">
+        <div class="uface"><img src="images/hetu.jpg" width="40" height="40" alt="" /></div>
+        <div class="uname">
+          <span id="uname"></span><i class="fontico down"></i>
+          <ul class="managerbox">
+            <li><a href="#"><i class="fontico lock"></i>修改密码</a></li>
+            <li><a id="logout"><i class="fontico logout"  ></i>退出登录</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="chat_message fn-clear">
+      <div class="chat_left">
+        <div class="message_box" id="message_box">
+        </div>
+        <div class="write_box">
+          <label class="imageLable"><input type="button" value="image"  /><input  type="file" id="img" class="sendimg"/></label>
+          <span class="emotion" id="emoji">表情</span>
+          <textarea id="message" name="message" class="write_area" placeholder="说点啥吧..."></textarea>
+          <input type="hidden" name="fromname" id="fromname" value="河图" />
+          <input type="hidden" name="to_uid" id="to_uid" value="0">
+          <div class="facebox fn-clear">
+            <div class="expression"></div>
+            <div class="chat_type" id="chat_type">群聊</div>
+            <button name="" class="sub_but">提 交</button>
+          </div>
+          <div id="emojiWrapper"></div>
+        </div>
+      </div>
+      <div class="chat_right">
+        <ul class="user_list" title="双击用户私聊">
+          <li class="fn-clear selected"><em>所有用户</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chatroom.js"></script>
+</body>
+
+</html>
